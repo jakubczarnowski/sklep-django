@@ -1,0 +1,9 @@
+.product-box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: column;
+}
+.dropdown-menu {
+	min-width: 290px;
+}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+    <div class="container-fluid">
+        <div class="row col-12">
+            <div class="col-md-2 m-0 p-0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+            </div>
+            <div class="col-md-10 text-center">
+                <div class="container">
+                    <div class="row col-md-12">
+                        {% for item in items %}
+                            <div class="col-md-3 product-box py-3 border">
+                                <img src="{{ item.image.url }}" width="200px" height="auto" alt="Zdjecie"/>
+                                <p>{{ item.name }}</p>
+                                <p>Cena: {{ item.price|floatformat:2}}</p>
+                                <a role="button" class="btn btn-primary"
+                                   href="{% url 'listings:listing' item.id %}">Szczegoly</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

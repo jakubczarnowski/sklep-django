@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container-fluid m3">
+	<div class="row">
+		<div class="col-sm-5">
+			<img src="{{ item.image.url }}" class="mx-auto rounded d-block border" width="300px" height="auto" alt="Zdjecie" />
+		</div>
+		<div class="col-lg-7">
+			<h1>{{item.name}}</h1>
+			<p>Cena: {{item.price}}</p>
+		</div>
+		<hr />
+	</div>
+</div>
+<div class="container-fluid m3">
+	<div class="container m3 border text-center">
+		<h2>Opis</h2>
+		<p>{{item.description}}</p>
+        
+    </div>
+</div>
+
+{% endblock %}
