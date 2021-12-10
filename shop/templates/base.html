@@ -24,13 +24,15 @@
                     <input class="form-control me-2 dropdown-toggle" type="text" id="quicksearch" placeholder="Search"
                            aria-label="Search" name="q" data-bs-toggle="dropdown" aria-expanded="false"/>
                     <button class="btn btn-outline-success" type="submit">Search</button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <ul class="dropdown-menu" id="searches" aria-labelledby="dropdownMenuLink">
                         <li><p class="dropdown-item disabled">Ostatnio wyszukiwane</p></li>
                         {% for search in request.session.lastSearch %}
                             <li><a class="dropdown-item"
                                    href=" {% url 'listings:search_results' %}?q={{ search }} ">{{ search }}</a>
                             </li>
                         {% endfor %}
+
+
                     </ul>
                 </form>
             </div>

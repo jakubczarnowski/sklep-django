@@ -21,7 +21,7 @@ def listing(request, id):
 def search(request):
     q = request.GET.get("q")
     last_searches = []
-    items = Listing.objects.filter(name__contains=q)
+    items = Listing.objects.filter(name__contains=q.strip())
     if "lastSearch" not in request.session or not request.session['lastSearch']:
         request.session["lastSearch"] = [q]
         request.session.modified = True
@@ -36,6 +36,6 @@ def quick_search(request):
     amount = 3
     if request.is_ajax() and request.method == "GET":
         text = request.GET.get('currentWord', None)
-        items = list(Listing.objects.filter(name__contains=text)[:amount].values())
+        items = list(Listing.objects.filter(name__contains=text.strip())[:amount].values())
         return JsonResponse({"items": items}, status=200)
     return redirect('listings:index')
