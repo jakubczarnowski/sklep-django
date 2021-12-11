@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Listing
+from .models import Listing, Category
 from django.http import JsonResponse
 from django.core import serializers
 from django.shortcuts import get_object_or_404, get_list_or_404
@@ -9,7 +9,8 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 
 def index(request):
     items = get_list_or_404(Listing.objects.all())
-    context = {'items': items, }
+    categories = Category.objects.all()
+    context = {'items': items, 'categories': categories}
     return render(request, 'listings/index.html', context)
 
 
@@ -20,7 +21,6 @@ def listing(request, id):
 
 def search(request):
     q = request.GET.get("q")
-    last_searches = []
     items = Listing.objects.filter(name__contains=q.strip())
     if "lastSearch" not in request.session or not request.session['lastSearch']:
         request.session["lastSearch"] = [q]
@@ -39,3 +39,8 @@ def quick_search(request):
         items = list(Listing.objects.filter(name__contains=text.strip())[:amount].values())
         return JsonResponse({"items": items}, status=200)
     return redirect('listings:index')
+
+
+def category(request, id):
+    items = Listing.objects.filter(category_id=id)
+    return render(request, 'listings/category.html', context={'items': items})

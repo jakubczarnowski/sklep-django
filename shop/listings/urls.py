@@ -4,8 +4,9 @@ from . import views
 
 app_name = 'listings'
 urlpatterns = [
-    path('', views.index, name = 'index'),
+    path('', views.index, name='index'),
     path('listings/<int:id>', views.listing, name='listing'),
     path('search/', views.search, name="search_results"),
-    path('quicksearch/', views.quick_search, name="quick_search")
+    path('quicksearch/', views.quick_search, name="quick_search"),
+    path('category/<int:id>', views.category, name="category")
 ]

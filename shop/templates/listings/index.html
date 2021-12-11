@@ -4,11 +4,16 @@
         <div class="row col-12">
             <div class="col-md-2 m-0 p-0">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    {% if categories %}
+                        {% for category in categories %}
+                            <a href={% url 'listings:category' id=category.id %} class="text-decoration-none">
+                                <li class="list-group-item ">
+                                    {{ category.name }}
+                                </li>
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+
                 </ul>
             </div>
             <div class="col-md-10 text-center">
