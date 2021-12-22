@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+    <div class="container">
+        <div class="row">
+            {% if listings %}
+                {% for item in listings %}
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="{{ item.image.url }}" class="cartImage" alt="zdjecie">
+                            </div>
+                            <div class="col-6"><p>{{ item.name }}</p></div>
+                            <div class="col-3"><p>{{ item.price }}</p></div>
+                        </div>
+                        <button type="button" class="btn btn-primary addToCart my-2" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                                data-id="{{ item.id }}">Add to Cart
+                        </button>
+                        <a data-id="{{ item.id }}" class="btn btn-danger btn-sm deleteFavorite">
+                            <i class="fa fa-times">Delete</i>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h1 class="text-center">No favorite listings</h1>
+            {% endif %}
+
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dodano do koszyka</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'listings:cart' %}" type="button" class="btn btn-secondary"
+                       data-bs-dismiss="modal">Wroc do zakupow
+                    </a>
+                    <a href="{% url 'listings:cart' %}" type="button" class="btn btn-primary">Idz do koszyka</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

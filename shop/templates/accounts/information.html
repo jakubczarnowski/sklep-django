@@ -1,38 +1,43 @@
 {% extends 'base.html' %} {% load static %} {% block content %}{% load crispy_forms_tags %}
 
-<div class="container py-5">
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Info</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td scope="row"></td>
-				<td>Username:</td>
-				<td>{{user.username}}</td>
-			</tr>
-			<tr>
-				<td scope="row"></td>
-				<td>Account Level:</td>
-				{%if user.is_staff%}
-				<td>Admin</td>
-				{%else%}
-				<td>User</td>
-				{%endif%}
-			</tr>
-			<tr>
-				<td scope="row"></td>
-				<td>Created:</td>
-				<td>{{user.date_joined}}</td>
-			</tr>
-		</tbody>
-	</table>
-	<a name="Logout" class="btn btn-primary" href="{% url 'accounts:logout' %}" role="button">Log out</a>
-	{%if user.is_staff%}
-	<a name="Logout" class="btn btn-primary" href="{% url 'admin:index' %}" role="button">Go to admin page</a>
-	{%endif%}
-</div>
+    <div class="container py-5">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Info</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td scope="row"></td>
+                <td>Username:</td>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <td scope="row"></td>
+                <td>Account Level:</td>
+                {% if user.is_staff %}
+                    <td>Admin</td>
+                {% else %}
+                    <td>User</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td scope="row"></td>
+                <td>Created:</td>
+                <td>{{ user.date_joined }}</td>
+            </tr>
+            <tr>
+                <td scope="row"></td>
+                <td>Favorite:</td>
+                <td><a href="{% url 'accounts:favorite' %}">Link</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <a name="Logout" class="btn btn-primary" href="{% url 'accounts:logout' %}" role="button">Log out</a>
+        {% if user.is_staff %}
+            <a name="Logout" class="btn btn-primary" href="{% url 'admin:index' %}" role="button">Go to admin page</a>
+        {% endif %}
+    </div>
 {% endblock %}

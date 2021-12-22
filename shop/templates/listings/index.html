@@ -26,11 +26,34 @@
                                 <p>Cena: {{ item.price|floatformat:2}}</p>
                                 <a role="button" class="btn btn-primary"
                                    href="{% url 'listings:listing' item.id %}">Szczegoly</a>
+                                <button type="button" class="btn btn-primary addToCart my-2" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"
+                                        data-id="{{ item.id }}">Add to Cart
+                                </button>
+
                             </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Dodano do koszyka</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{% url 'listings:cart' %}" type="button" class="btn btn-secondary"
+                               data-bs-dismiss="modal">Wroc do zakupow
+                            </a>
+                            <a href="{% url 'listings:cart' %}" type="button" class="btn btn-primary">Idz do koszyka</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
     </div>
 {% endblock %}

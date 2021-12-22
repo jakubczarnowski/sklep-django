@@ -14,7 +14,6 @@
     <div class="container-fluid">
         <a href="{% url 'listings:index' %}"><img src="{% static 'img/logo.png' %}" width="107" height="54" alt=""
                                                   class="navbar-brand" href="{% url 'listings:index' %}"/></a>
-
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active mr-5" aria-current="page" href="{% url 'listings:index' %}">Home</a>
@@ -31,12 +30,13 @@
                                    href=" {% url 'listings:search_results' %}?q={{ search }} ">{{ search }}</a>
                             </li>
                         {% endfor %}
-
-
                     </ul>
                 </form>
             </div>
         </div>
+        <a href="{% url 'listings:cart' %}" class="float-right"><img src="{% static 'img/cart.png' %}"
+                                                                     alt="Koszyk" width="30px"
+                                                                     height="30px"></a>
         {% if not user.is_authenticated %}
             <a class="nav-link active mr-5 btn- ms-auto" href="{% url 'accounts:login' %}">Log In</a>
         {% else %}
@@ -48,12 +48,22 @@
         </button>
     </div>
 </nav>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 {% block content %} {% endblock %}
 <footer class="text-center bg-light container-">
     <p>Prawa reserved</p>
 </footer>
+<script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/quicksearch.js' %}"></script>
+<script src="{% static 'js/cart.js' %}"></script>
+<script src="{% static 'js/paymentCheckout.js' %}"></script>
 </body>
 </html>

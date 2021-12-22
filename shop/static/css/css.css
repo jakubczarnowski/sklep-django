@@ -1,9 +1,17 @@
 .product-box {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
 }
+
 .dropdown-menu {
-	min-width: 290px;
+    min-width: 290px;
+}
+
+.cartImage {
+    max-height: 120px;
+    max-width: 200px;
+    height: auto;
+    width: auto;
 }

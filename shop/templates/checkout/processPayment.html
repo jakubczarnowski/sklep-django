@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% load static %} {% block content %}{% load crispy_forms_tags %}
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Twoje zakupy
+                </h5>
+            </div>
+            <div class="modal-body">
+                {% if items %}
+                    <table class="table table-image">
+                        <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Price Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in items %}
+                            <tr>
+                                <td class="w-25">
+                                    <a href="{% url 'listings:listing' item.listing.id %}">
+                                        <img class="cartImage" src="{{ item.listing.image.url }}"
+                                             alt="Sheep"></a></td>
+
+                                <td>{{ item.listing.name }}</td>
+                                <td>{{ item.listing.price }} PLN</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.get_sum }} PLN</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end">
+                        <h5>Total: <span class="price text-success">{{ order.get_total }} PLN</span></h5>
+                    </div>
+                {% endif %}
+
+
+            </div>
+            <div class="modal-footer border-top-0 d-flex justify-content-between">
+                <a href="{% url 'listings:index' %}" type="button" class="btn btn-secondary"
+                   data-dismiss="modal">Go back
+                </a>
+                <form action="{% url 'checkout:orderFinished' %}">
+                    <button class="btn btn-success pay" type="button">
+                        <span id="spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                              hidden></span>
+                        <span class="sr-only">Pay</span>
+                    </button>
+                    <input type="submit" value="" class="redirect" hidden>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -35,3 +35,4 @@ function addSearches(items) {
 							</li>\n`)
     })
 }
+

@@ -11,4 +11,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(
         template_name='accounts/loggedout.html',
     ), name="logout"),
+    path('favorite/', views.favoriteListings, name="favorite"),
+    path('deleteFavorite/', views.deleteFavorite, name="deleteFavorite"),
+    path('addFavorite/', views.addFavorite, name="addFavorite"),
 ]

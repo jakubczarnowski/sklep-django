@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% load static %} {% block content %}{% load crispy_forms_tags %}
+
+    <div class="container py-5">
+        <h1>Address</h1>
+        <form action="" method="GET">
+            <label for="choice">Chcesz uzyc zapisanego adresu?</label>
+            <select name="choice">
+                {% for address in addresses %}
+                    <option value="{{ address.id }}"
+                            {% if request.GET.choice == address.id|stringformat:"i" %}selected{% endif %}>
+                        {{ address.addressName }}
+                    </option>
+                {% endfor %}
+                <option value="new" {% if request.GET.choice == "new" %}selected{% endif %}>Create new</option>
+                <input type="submit" value="Change">
+            </select>
+        </form>
+        <form method="POST">
+            {% csrf_token %}
+            <input name="id" type="hidden" value="{{ id }}">
+            {{ address_form|crispy }}
+            <button class="btn btn-primary" type="submit">Dalej</button>
+        </form>
+    </div>
+{% endblock %}

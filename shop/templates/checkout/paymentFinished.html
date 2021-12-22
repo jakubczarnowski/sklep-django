@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% load static %} {% block content %}{% load crispy_forms_tags %}
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Produkty zakupione!
+                </h5>
+            </div>
+            <div class="modal-body">
+                <table class="table table-image">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Price Total</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td class="w-25">
+                                <a href="{% url 'listings:listing' item.listing.id %}">
+                                    <img class="cartImage" src="{{ item.listing.image.url }}"
+                                         alt="Sheep"></a></td>
+
+                            <td>{{ item.listing.name }}</td>
+                            <td>{{ item.listing.price }} PLN</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.get_sum }} PLN</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-end">
+                    <h5>Total: <span class="price text-success">{{ order.get_total }} PLN</span></h5>
+                </div>
+                <table class="table table-image">
+                    <thead>
+                    <tr>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Street</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Zip-code</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ address.phone_number }}</td>
+                        <td>{{ address.email }}</td>
+                        <td>{{ address.street }}</td>
+                        <td>{{ address.city }}</td>
+                        <td>{{ address.zip_code }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
